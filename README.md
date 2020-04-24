@@ -128,4 +128,4 @@ uniapp插件市场地址：https://ext.dcloud.net.cn/plugin?id=1685
 
 github地址：https://github.com/yedsn/uniapp-list
 
-如果对你有帮助，请市场五星，github点个star，你的反馈是我继续开源的动力
+`如果对你有帮助，请市场五星，github点个star，你的反馈是我继续开源的动力`
