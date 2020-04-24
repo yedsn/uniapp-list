@@ -121,6 +121,5 @@
   - endAfter 通知下拉刷新组件刷新已经完成
 
 ****
-
 本组件 基于`zwyboom`的uni-list组件进行修改 https://github.com/seventhcode/uni-list，感谢 `@zwyboom` 的分享。
 
