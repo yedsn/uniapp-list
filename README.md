@@ -123,3 +123,5 @@
 ****
 本组件 基于`zwyboom`的uni-list组件进行修改 https://github.com/seventhcode/uni-list，感谢 `@zwyboom` 的分享。
 
+****
+uniapp插件市场地址：https://ext.dcloud.net.cn/plugin?id=1685
