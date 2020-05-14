@@ -29,6 +29,11 @@
 
       <script>
         export default {
+			data() {
+					  return {
+						  list: []
+					  }
+			},
             computed: {
                 options() {
                     return {
