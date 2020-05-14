@@ -1,7 +1,7 @@
 ### 列表组件封装最佳实践
 
 #### 效果展示
-![效果展示](http://p2.so.qhmsg.com/t02a30bc64520e710c5.jpg)
+![效果展示](http://p2.so.qhmsg.com/t02ff3736266871b6f3.jpg)
 
 *目前只在小程序和H5页面测试过没问题，其他的需要自己测试*
 
@@ -22,10 +22,8 @@
 
       ```html
       <template>
-          <list ref="list" :options="options">
-              <template v-slot="{list}">
-                  <view class="item" v-for="(item, index) in list" :key="index">我是第{{index}}项</view>
-              </template>
+          <list ref="list" :options="options" @success="onSuccess">
+			  <view class="item" v-for="(item, index) in list" :key="index">我是第{{index}}项</view>
           </list>
       </template>
 
@@ -43,6 +41,11 @@
                 }
 
             },
+			methods: {
+				onSuccess(list) {
+					this.list = list
+				}
+			},
             mounted() {
                 this.$refs.list.request()
             }
@@ -121,11 +124,6 @@
   - endAfter 通知下拉刷新组件刷新已经完成
 
 ****
+
 本组件 基于`zwyboom`的uni-list组件进行修改 https://github.com/seventhcode/uni-list，感谢 `@zwyboom` 的分享。
 
-****
-uniapp插件市场地址：https://ext.dcloud.net.cn/plugin?id=1685
-
-github地址：https://github.com/yedsn/uniapp-list
-
-`如果对你有帮助，请市场五星，github点个star，你的反馈是我继续开源的动力`

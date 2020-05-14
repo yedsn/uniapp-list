@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<scroll-view class="scroll-view" scroll-y="true" @scroll="onScroll" :scroll-top="scrollTopValue" @scrolltolower="request" :scroll-with-animation="false">			
-			<slot :list="list"></slot>
+			<slot></slot>
 			<view class="tip">
 				<template v-if="hasMore">{{ loadingTip }}</template>
 				<template v-else>{{ noMoreTip }}</template>
@@ -61,13 +61,12 @@ export default {
 		 * 获取数据
 		 * url：options配置中的url值
 		 * params：options中的params内容 + 当前页码 + 每页内容数
-		 * converter：数据转换器，请求后需要特殊处理数据时可以用到
 		 */
-		getData({url, params, converter}) {
+		getData({url, params}) {
 			return new Promise((resolve, reject) => {
 				uni.showToast({
 					icon: 'none',
-					title: `获取${url}的第${params.pi}页数据`
+					title: `获取${url}的第${params.pi}页的${params.ps}条数据`
 				})
 				
 				// 以下部分改成自己获取当前页数据的方法，参考
@@ -104,13 +103,13 @@ export default {
 				this.loadingMore = true
 				
 				//处理参数
-				let {url, params, converter} = this.options
+				let {url, params} = this.options
 				params = typeof params === "function" ? params() : params // 如果params是个方法，则调用方法获取值
 				// 更新页数
 				this.pi = params.pi || this.pi
 				this.ps = params.ps || this.ps
 				
-				this.getData({url, params: {params, ps: this.ps, pi: this.pi}, converter}).then((list) => {
+				this.getData({url, params: {...params, ps: this.ps, pi: this.pi}}).then((list) => {
 					this.list = this.list.concat(list) // 合并列表内容
 					// 判断列表是否更多
 					if(list.length == 0 || list.length < this.ps) {

@@ -1,12 +1,10 @@
 <template>
 	<view>
 		<refresh ref="refresh" @refresh='$refs.list.refresh()'>
-			<list ref="list" :options="options" @success="$refs.refresh.endAfter()">
-				<template v-slot="{list}">
-					<view class="title">列表组件封装</view>
-					<!-- 循环数据 -->
-					<view class="item" v-for="(item, index) in list" :key="index">我是第{{index}}项</view>
-				</template>
+			<list ref="list" :options="options" @success="onListSuccess">
+				<view class="title">列表组件封装</view>
+				<!-- 循环数据 -->
+				<view class="item" v-for="(item, index) in list" :key="index">我是第{{index}}项</view>
 			</list>
 		</refresh>
 	</view>
@@ -14,6 +12,11 @@
 
 <script>
 	export default {
+		data() {
+			return {
+				list: []
+			}
+		},
 		computed: {
 			
 			// 定义请求的配置，配置详情请查看文档说明
@@ -21,12 +24,17 @@
 				return {
 					url: '/test',
 					params: {
-						
 					}
 				}
 				
 			}
 			
+		},
+		methods: {
+			onListSuccess (list) {
+				this.list = list
+				this.$refs.refresh.endAfter()
+			}
 		},
 		mounted() {
 			// 调用组件的request方法开始获取数据

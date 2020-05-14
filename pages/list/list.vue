@@ -1,9 +1,7 @@
 <template>
     <list ref="list" :options="options" @success="onSuccess" @scroll="onScroll">
-        <template v-slot="{list}">
-            <view class="item" v-for="(item, index) in list" :key="index">我是第{{index}}项</view>
-			<view class="scroll-top" @click="$refs.list.scrollTop()" v-show="showToTop">回到顶部</view>
-        </template>
+        <view class="item" v-for="(item, index) in list" :key="index">我是第{{index}}项</view>
+		<view class="scroll-top" @click="$refs.list.scrollTop()" v-show="showToTop">回到顶部</view>
     </list>
 </template>
 
@@ -11,6 +9,7 @@
   export default {
 	  data() {
 		  return {
+			  list: [],
 			  showToTop: false
 		  }
 	  },
@@ -28,6 +27,7 @@
       },
 	  methods: {
 		onSuccess(list) {
+			this.list = list
 			console.log("请求成功，当前的列表内容为：", list)
 		},
 		onScroll(e) {
